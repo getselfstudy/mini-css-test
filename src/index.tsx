@@ -1,17 +1,13 @@
-import test from './style.css';
-import workingTest from "./workingStyle.css";
-const notWorkingTest = require("./notWorking.xcss");
+const test = require('./style.css');
+const workingTest = require("./workingStyle.css");
 
 // The code below does not regard the core concept explained in the post 
 const infos = [{
-	description: "Should contain property someStyle",
-	styles: workingTest,
+	description: "Empty CSS file (no root . rules)",
+	styles: test,
 }, {
-	description: "Should not be undefined (as of webpack5 this also seems to be happening with style-loader so it's probably ok)",
-	styles: test
-}, {
-	description: "Should not contain default property",
-	styles: notWorkingTest,
+	description: "Populated CSS file",
+	styles: workingTest
 }];
 
 function createInfo(l) {

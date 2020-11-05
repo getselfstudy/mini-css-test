@@ -8,7 +8,7 @@ function addConfigs(r, c) {
 	return r;
 }
 
-exports.cssLoader = () => {
+exports.cssLoader = (esModule = true) => {
 	return {
 		loader: 'css-loader',
 		options: {
@@ -18,20 +18,28 @@ exports.cssLoader = () => {
 	}
 }
 
-exports.loadCSS = (test) => {
+exports.loadCSS = (test, esModule = true) => {
 	const rule = {
 		test,
-		use: ['style-loader', exports.cssLoader()],
+		use: [{
+			loader: 'style-loader',
+			options: {
+				esModule	
+			}
+		}, exports.cssLoader(esModule)],
 	};
 
 	return addConfigs(rule, {});
 };
 
-exports.extractCSS = (test) => {
+exports.extractCSS = (test, esModule = true) => {
 	// basic rule
 	const rule = {
 		test,
-		use: [MiniCssExtractPlugin.loader, exports.cssLoader()],
+		use: [{
+			loader: MiniCssExtractPlugin.loader,
+			options: { esModule }
+		}, exports.cssLoader(esModule)],
 	};
 
 	return addConfigs(rule, {});

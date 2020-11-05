@@ -4,9 +4,12 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
+    "@types/webpack-env": "^1.15.3",
+    "fork-ts-checker-webpack-plugin": "^5.2.1",
     "http-server": "^0.12.3",
     "ts-loader": "^8.0.9",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "webpack-env": "^0.8.0"
   },
   "devDependencies": {
     "css-loader": "^5.0.1",
@@ -19,7 +22,9 @@
   },
   "scripts": {
     "start": "webpack serve --env mode=development",
+    "start-non-module": "webpack serve --env mode=development-non-module",
     "build": "webpack --env mode=production",
+    "build-non-module": "webpack --env mode=production-non-module",
     "serve": "http-server dist"
   },
   "keywords": [],

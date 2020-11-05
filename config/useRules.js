@@ -1,23 +1,13 @@
 const { loadCSS, extractCSS, tsLoader } = require('./loaders');
 
-module.exports = (env) => {
+module.exports = (env, esModule) => {
 	const loaders = {
 		css: (i) => {
 			switch (i) {
 				case 'inline':
-					return loadCSS(/\.css$/);
+					return loadCSS(/\.css$/i, esModule);
 				case 'MCEP':
-					return extractCSS(/\.css$/);
-				default:
-					throw new Error(`The instruction ${i} is not covered`);
-			}
-		},
-		xcss: (i) => {
-			switch (i) {
-				case 'inline':
-					return loadCSS(/\.xcss$/);
-				case 'MCEP':
-					return extractCSS(/\.xcss$/);
+					return extractCSS(/\.css$/i, esModule);
 				default:
 					throw new Error(`The instruction ${i} is not covered`);
 			}
@@ -30,10 +20,6 @@ module.exports = (env) => {
 	// developer interface
 	const instructions = {
 		css: {
-			development: 'inline',
-			production: 'MCEP',
-		},
-		xcss: {
 			development: 'inline',
 			production: 'MCEP',
 		},
@@ -50,6 +36,6 @@ module.exports = (env) => {
 		return loaders[key](i);
 	});
 
-	console.info(message, rules);
+	console.info(`${message}: ${JSON.stringify(rules, null, "  ")}`);
 	return { rules };
 };
