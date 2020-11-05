@@ -7,7 +7,7 @@ const infos = [{
 	description: "Should contain property someStyle",
 	styles: workingTest,
 }, {
-	description: "Should not be undefined",
+	description: "Should not be undefined (as of webpack5 this also seems to be happening with style-loader so it's probably ok)",
 	styles: test
 }, {
 	description: "Should not contain default property",
